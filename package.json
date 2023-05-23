@@ -8,9 +8,14 @@
     "jwt-encode": "^1.0.1",
     "miragejs": "^0.1.47",
     "mockman-js": "^1.1.5",
+    "primeflex": "^3.3.0",
+    "primeicons": "^6.0.1",
+    "primereact": "^9.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.11.2",
     "react-scripts": "5.0.1",
+    "react-transition-group": "^4.4.5",
     "uuid": "^8.3.2"
   },
   "scripts": {

@@ -1,41 +1,62 @@
-import "./App.css";
+import { Routes, Route, NavLink } from "react-router-dom";
+
+// import "./App.css";
+
+import { InputText } from "primereact/inputtext";
+import { Button } from "primereact/button";
+import { Toast } from "primereact/toast";
+
+import "primereact/resources/themes/lara-light-teal/theme.css";
+import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
+
+import Mockman from "mockman-js";
+import { Products } from "./pages/Products";
+import { Auth } from "./pages/Auth";
 import logo from "./logo.png";
+import { useState , useRef} from "react";
 
 function App() {
+  const [text, setText] = useState("");
+  const toastRef = useRef();
+
+  const onBtnClick = () => {
+    if (text) {
+      toastRef.current.show({
+        severity: "info",
+        summary: "Success",
+        detail: text,
+      });
+    } else {
+      toastRef.current.show({
+        severity: "error",
+        summary: "Error",
+        detail: "No data to display",
+      });
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} alt="mockBee logo" width="180" height="180" />
-        <h1 className="brand-title">
-          Welcome to <span>mockBee!</span>
-        </h1>
-        <p className="brand-description">
-          Get started by editing <code>src/App.js</code>
-        </p>
-        <div className="links">
-          <a
-            href="https://mockbee.netlify.app/"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Explore mockBee
-          </a>
-          <a
-            href="https://mockbee.netlify.app/docs/api/introduction"
-            target="_blank"
-            rel="noreferrer"
-          >
-            API Documentation
-          </a>
-          <a
-            href="https://github.com/neogcamp/mockBee"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Contribute
-          </a>
-        </div>
-      </header>
+      <Toast ref={toastRef} />
+      <h1>Project 1</h1>
+
+      <span className="p-float-label">
+      <InputText id="input_txt" value={text} onChange={(e) => setText(e.target.value)} />
+      <label htmlFor="input_txt">Enter Name</label>
+      </span>
+      <p>{text}</p>
+      <Button
+        type="button"
+        label="Submit"
+        icon="pi pi-check"
+        onClick={onBtnClick}
+      />
+      <Routes>
+        <Route path="/products" element={<Products />} />
+        <Route path="/auth" element={<Auth />} />
+        <Route path="/mockman" element={<Mockman />} />
+      </Routes>
     </div>
   );
 }
