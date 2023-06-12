@@ -1,0 +1,58 @@
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    box-shadow: 0px 0px 5px grey;
+    align-items: center;
+}
+
+.logo {
+    padding: 0.75rem;
+    margin: 0 0 0 .45em;
+}
+
+.navigation {
+    display: flex;
+    flex-direction: row;
+}
+
+.nav-link {
+    display: block;
+    padding: 1em;
+}
+
+.nav-link :hover {
+    color: #1bd0a0;
+}
+
+.wrapper {
+    position: relative;
+}
+
+.icon {
+    height: 1.5rem;
+    width: 1.5rem;
+    padding: 4px;
+    position: absolute;
+    box-sizing: border-box;
+    top: 50%;
+    left: 2px;
+    transform: translateY(-50%);
+}
+
+.input {
+    box-sizing: border-box;
+    text-indent: 10%;
+    width: 95%;
+    padding: 0.4rem;
+    border: 0.1rem solid grey;
+    border-radius: 2rem;
+}
+
+.input:focus {
+    outline: none;
+    border: 0.12rem solid #ff9824;
+}
+
+::placeholder {
+    margin-left: 1rem;
+}
