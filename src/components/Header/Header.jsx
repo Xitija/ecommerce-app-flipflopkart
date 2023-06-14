@@ -16,11 +16,11 @@ export const Header = () => {
         />
       </NavLink>
       <div className="wrapper" style={{ width: "30%" }}>
-        <div class="icon">
+        <div className="icon">
           <CiSearch />
         </div>
         <input
-          class="input"
+          className="input"
           type="text"
           placeholder="Search Flipflops"
           name="search"
