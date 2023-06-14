@@ -1,9 +1,28 @@
 import { v4 as uuid } from "uuid";
+import { flipflops_men,flipflops_women,flipflops_kids } from "../../assets/pictures";
+
+export const categories = [
+  {
+    _id: uuid(),
+    categoryName: "men",
+    image: flipflops_men,
+  },
+  {
+    _id: uuid(),
+    categoryName: "women",
+    image: flipflops_women,
+  },
+  {
+    _id: uuid(),
+    categoryName: "kids",
+    image: flipflops_kids,
+  },
+];
 
 /**
  * Category Database can be added here.
  * You can add category of your wish with different attributes
- * */
+ * 
 
 export const categories = [
   {
@@ -25,3 +44,5 @@ export const categories = [
       "Meant to cause discomfort and fear for both the character and readers, horror writers often make use of supernatural and paranormal elements in morbid stories that are sometimes a little too realistic.",
   },
 ];
+
+*/
