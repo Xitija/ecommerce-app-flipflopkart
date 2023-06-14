@@ -1,0 +1,13 @@
+.slider {
+    margin: auto;
+    padding: 1rem;
+}
+
+.banner {
+    display: block;
+    width: 75rem;
+    height: 35rem;
+    object-fit: cover;
+    margin: 0px auto;
+    cursor: pointer;
+}
