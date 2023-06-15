@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import Carousel from "nuka-carousel";
 import { Categories } from "../../components/Categories/Categories";
 
@@ -12,7 +14,7 @@ import {
 export const Landing = () => {
   return (
     <div>
-      <div className="slider">
+      <Link to="/products" className="slider">
         <Carousel
           autoplay
           pauseOnHover
@@ -36,7 +38,7 @@ export const Landing = () => {
             className="banner"
           />
         </Carousel>
-      </div>
+      </Link>
       <Categories />
     </div>
   );
