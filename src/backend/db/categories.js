@@ -4,17 +4,17 @@ import { flipflops_men,flipflops_women,flipflops_kids } from "../../assets/pictu
 export const categories = [
   {
     _id: uuid(),
-    categoryName: "men",
+    categoryName: "Men",
     image: flipflops_men,
   },
   {
     _id: uuid(),
-    categoryName: "women",
+    categoryName: "Women",
     image: flipflops_women,
   },
   {
     _id: uuid(),
-    categoryName: "kids",
+    categoryName: "Kids",
     image: flipflops_kids,
   },
 ];
