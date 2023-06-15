@@ -9,11 +9,11 @@ export const Categories = () => {
 
   const handleCategoryClick = (categoryName) => {
     // document.body.scrollTop = document.documentElement.scrollTop = 0;
-    window.scroll({
-      top: 0, 
-      left: 0, 
-      behavior: 'smooth' 
-     });
+    // window.scroll({
+    //   top: 0, 
+    //   left: 0, 
+    //   behavior: 'smooth' 
+    //  });
     navigate("/products");
     dataDispatcher({
       type: "SELECT_CATEGORY",
