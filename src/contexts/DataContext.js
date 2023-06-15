@@ -15,8 +15,8 @@ export const DataProvider = ({ children }) => {
 
   const getData = async () => {
     try {
-        getCategories();
-        getProducts();
+      getCategories();
+      getProducts();
     } catch (e) {
       console.error(e);
     }
@@ -37,7 +37,6 @@ export const DataProvider = ({ children }) => {
   const getProducts = async () => {
     const response = await fetch("/api/products");
     const { products } = await response.json();
-    console.log(products, response);
     if (response.status === 200) {
       dataDispatcher({
         type: "SET_PRODUCTS",
@@ -46,12 +45,30 @@ export const DataProvider = ({ children }) => {
     }
   };
 
+  const setPriceRange = () => {
+    const products = dataState.products;
+    return products?.reduce(
+      (prices, { sell_price }) => {
+        const min = sell_price < prices.minPrice ? sell_price : prices.minPrice;
+        const max = sell_price > prices.maxPrice ? sell_price : prices.maxPrice;
+        return { minPrice: min, maxPrice: max };
+      },
+      { minPrice: products[0]?.sell_price, maxPrice: products[0]?.sell_price }
+    );
+  };
+
   useEffect(() => {
     getData();
-  },[]);
+  }, []);
 
   const value = {
-    dataState,
+    categories: dataState.categories,
+    products: dataState.products,
+    selectedCategories: dataState.selectedCategories,
+    priceLessThan: dataState.priceLessThan,
+    selectedRating: dataState.selectedRating,
+    selectedSort: dataState.selectedSort,
+    setPriceRange,
     dataDispatcher,
   };
 
