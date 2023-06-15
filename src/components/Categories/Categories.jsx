@@ -3,11 +3,17 @@ import { useData } from "../../contexts/DataContext";
 import "./Categories.css";
 
 export const Categories = () => {
-  const { dataState, dataDispatcher } = useData();
+  const { categories, dataDispatcher } = useData();
 
   const navigate = useNavigate();
 
   const handleCategoryClick = (categoryName) => {
+    // document.body.scrollTop = document.documentElement.scrollTop = 0;
+    window.scroll({
+      top: 0, 
+      left: 0, 
+      behavior: 'smooth' 
+     });
     navigate("/products");
     dataDispatcher({
       type: "SELECT_CATEGORY",
@@ -19,7 +25,7 @@ export const Categories = () => {
     <div className="categories-background">
       <h1 className="category-heading">Shop For</h1>
       <div className="categories-section">
-        {dataState?.categories?.map(({ _id, categoryName, image }) => (
+        {categories?.map(({ _id, categoryName, image }) => (
           <div
             className="category-card"
             key={_id}
@@ -27,7 +33,7 @@ export const Categories = () => {
           >
             <img className="category-image" src={image} alt={categoryName} />
             <label className="category-label">
-              {categoryName[0].toUpperCase() + categoryName.slice(1)}
+              {categoryName}
             </label>
           </div>
         ))}
