@@ -1,10 +1,28 @@
-import { NavLink, Routes, Route } from "react-router-dom";
+import {
+  NavLink,
+  Routes,
+  Route,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import { CiHeart, CiShoppingBasket, CiUser, CiSearch } from "react-icons/ci";
 
+import { useFilters } from "../../contexts/FiltersContext";
 import "../Header/Header.css";
 import finallogo from "../../assets/finallogo.png";
 
 export const Header = () => {
+  const { search, filtersDispatcher } = useFilters();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleSearchInput = () => {
+    // TODO : if search length is more then navigate and dispatch both
+    if (location.pathname != "/products") {
+      navigate("/products");
+    }
+  };
+
   return (
     <nav className="nav-bar">
       <NavLink to="/" style={{ display: "contents" }}>
@@ -15,7 +33,11 @@ export const Header = () => {
           alt="Flipflopkart_logo"
         />
       </NavLink>
-      <div className="wrapper" style={{ width: "30%" }}>
+      <div
+        className="wrapper"
+        style={{ width: "30%" }}
+        onClick={() => handleSearchInput()}
+      >
         <div className="icon">
           <CiSearch />
         </div>
@@ -24,6 +46,13 @@ export const Header = () => {
           type="text"
           placeholder="Search Flipflops"
           name="search"
+          value={search}
+          onChange={(event) =>
+            filtersDispatcher({
+              type: "SET_SEARCH_VALUE",
+              payload: event.target.value,
+            })
+          }
         />
       </div>
       <div className="navigation">

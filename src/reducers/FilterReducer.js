@@ -37,6 +37,8 @@ export const filtersReducer = (state, action) => {
       return { ...state, selectedSort: action.payload };
     case "SELECT_OUT_OF_STOCK":
       return { ...state, includeOutOfStock: !state.includeOutOfStock };
+    case "SET_SEARCH_VALUE":
+      return { ...state, search: action.payload };
     case "CLEAR_FILTERS":
       return {
         ...state,
