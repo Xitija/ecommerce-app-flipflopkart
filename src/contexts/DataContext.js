@@ -13,16 +13,16 @@ export const Data = createContext();
 export const DataProvider = ({ children }) => {
   const [dataState, dataDispatcher] = useReducer(dataReducer, initialDataState);
 
-  const getData = async () => {
+  const setData = async () => {
     try {
-      getCategories();
-      getProducts();
+      setCategories();
+      setProducts();
     } catch (e) {
       console.error(e);
     }
   };
 
-  const getCategories = async () => {
+  const setCategories = async () => {
     const response = await fetch("/api/categories");
     const { categories } = await response.json();
     console.log(categories, response);
@@ -34,7 +34,7 @@ export const DataProvider = ({ children }) => {
     }
   };
 
-  const getProducts = async () => {
+  const setProducts = async () => {
     const response = await fetch("/api/products");
     const { products } = await response.json();
     if (response.status === 200) {
@@ -45,6 +45,7 @@ export const DataProvider = ({ children }) => {
     }
   };
 
+  // setting only once how to avoid recalculation
   const setPriceRange = () => {
     const products = dataState.products;
     return products?.reduce(
@@ -58,16 +59,12 @@ export const DataProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    getData();
+    setData();
   }, []);
 
   const value = {
     categories: dataState.categories,
     products: dataState.products,
-    selectedCategories: dataState.selectedCategories,
-    priceLessThan: dataState.priceLessThan,
-    selectedRating: dataState.selectedRating,
-    selectedSort: dataState.selectedSort,
     setPriceRange,
     dataDispatcher,
   };
