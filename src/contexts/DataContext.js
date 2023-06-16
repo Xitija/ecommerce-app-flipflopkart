@@ -1,10 +1,4 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useReducer,
-  useState,
-} from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 
 import { initialDataState, dataReducer } from "../reducers/DataReducer";
 
@@ -25,7 +19,6 @@ export const DataProvider = ({ children }) => {
   const setCategories = async () => {
     const response = await fetch("/api/categories");
     const { categories } = await response.json();
-    console.log(categories, response);
     if (response.status === 200) {
       dataDispatcher({
         type: "SET_CATEGORIES",

@@ -1,7 +1,5 @@
 import {
   NavLink,
-  Routes,
-  Route,
   useLocation,
   useNavigate,
 } from "react-router-dom";
@@ -18,7 +16,7 @@ export const Header = () => {
 
   const handleSearchInput = () => {
     // TODO : if search length is more then navigate and dispatch both
-    if (location.pathname != "/products") {
+    if (location.pathname !== "/products") {
       navigate("/products");
     }
   };
