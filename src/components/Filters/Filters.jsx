@@ -1,26 +1,27 @@
 import { useData } from "../../contexts/DataContext";
+import { useFilters } from "../../contexts/FiltersContext";
 
 import "./Filters.css";
 import { star } from "../../assets/pictures";
 
 export const Filters = () => {
+  const { categories, setPriceRange } = useData();
+
   const {
-    categories,
     priceLessThan,
     selectedRating,
     selectedSort,
     selectedCategories,
-    setPriceRange,
-    dataDispatcher,
-  } = useData();
+    filtersDispatcher,
+    includeOutOfStock,
+  } = useFilters();
 
   const ratings = [4, 3, 2, 1];
 
   const { minPrice, maxPrice } = setPriceRange();
 
   const sortHandler = (event) => {
-    console.log(event.target.value,"atvS")
-    dataDispatcher({
+    filtersDispatcher({
       type: "SELECT_SORT",
       payload: event.target.value,
     });
@@ -33,7 +34,7 @@ export const Filters = () => {
         <button
           className="filters-clear-btn"
           onClick={() =>
-            dataDispatcher({
+            filtersDispatcher({
               type: "CLEAR_FILTERS",
             })
           }
@@ -54,7 +55,7 @@ export const Filters = () => {
           max={maxPrice}
           value={priceLessThan}
           onChange={(event) =>
-            dataDispatcher({
+            filtersDispatcher({
               type: "SET_PRICE_LESS_THAN",
               payload: event.target.value,
             })
@@ -73,7 +74,7 @@ export const Filters = () => {
               value={categoryName}
               checked={selectedCategories.includes(categoryName)}
               onChange={(event) =>
-                dataDispatcher({
+                filtersDispatcher({
                   type: "SELECT_CATEGORY",
                   payload: event.target.value,
                 })
@@ -97,7 +98,7 @@ export const Filters = () => {
               value={rating}
               checked={rating === selectedRating}
               onChange={(event) =>
-                dataDispatcher({
+                filtersDispatcher({
                   type: "SELECT_RATING",
                   payload: event.target.value,
                 })
@@ -124,7 +125,7 @@ export const Filters = () => {
             name="sort"
             value="LOW_TO_HIGH"
             id="LOW_TO_HIGH"
-            checked={selectedSort == "LOW_TO_HIGH"}
+            checked={selectedSort === "LOW_TO_HIGH"}
             onChange={(e) => sortHandler(e)}
           />
           <label className="accessiblity" htmlFor="LOW_TO_HIGH">
@@ -138,13 +139,28 @@ export const Filters = () => {
             name="sort"
             value="HIGH_TO_LOW"
             id="HIGH_TO_LOW"
-            checked={selectedSort == "HIGH_TO_LOW"}
+            checked={selectedSort === "HIGH_TO_LOW"}
             onChange={(e) => sortHandler(e)}
           />
           <label className="accessiblity" htmlFor="HIGH_TO_LOW">
             High to Low
           </label>
         </div>
+      </div>
+      <div className="filters-category">
+        <p>Include Out of Stock</p>
+        <label className="switch">
+          <input
+            onChange={() =>
+              filtersDispatcher({
+                type: "SELECT_OUT_OF_STOCK",
+              })
+            }
+            type="checkbox"
+            checked={includeOutOfStock}
+          />
+          <span className="slider-orange round"></span>
+        </label>
       </div>
       <div className="filters-category"></div>
     </div>
