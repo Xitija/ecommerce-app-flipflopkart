@@ -1,21 +1,24 @@
 import { useNavigate } from "react-router-dom";
 import { useData } from "../../contexts/DataContext";
+import { useFilters } from "../../contexts/FiltersContext";
+
 import "./Categories.css";
 
 export const Categories = () => {
-  const { categories, dataDispatcher } = useData();
+  const { categories } = useData();
+  const { filtersDispatcher } = useFilters();
 
   const navigate = useNavigate();
 
   const handleCategoryClick = (categoryName) => {
     // document.body.scrollTop = document.documentElement.scrollTop = 0;
     // window.scroll({
-    //   top: 0, 
-    //   left: 0, 
-    //   behavior: 'smooth' 
+    //   top: 0,
+    //   left: 0,
+    //   behavior: 'smooth'
     //  });
     navigate("/products");
-    dataDispatcher({
+    filtersDispatcher({
       type: "SELECT_CATEGORY",
       payload: categoryName,
     });
@@ -32,9 +35,7 @@ export const Categories = () => {
             onClick={() => handleCategoryClick(categoryName)}
           >
             <img className="category-image" src={image} alt={categoryName} />
-            <label className="category-label">
-              {categoryName}
-            </label>
+            <label className="category-label">{categoryName}</label>
           </div>
         ))}
       </div>

@@ -38,7 +38,7 @@ export const DataProvider = ({ children }) => {
     }
   };
 
-  // setting only once how to avoid recalculation
+  // TODO: setting only once how to avoid recalculation
   const setPriceRange = () => {
     const products = dataState.products;
     return products?.reduce(
