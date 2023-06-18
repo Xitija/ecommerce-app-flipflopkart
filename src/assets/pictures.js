@@ -5,6 +5,7 @@ import flipflop_banner3 from "./flipflop_banner3.jpg";
 import flipflops_men from "./flipflops_men.jpg";
 import flipflops_women from "./flipflops_women.jpg";
 import flipflops_kids from "./flipflops_kids.jpg"
+import star from "./star.svg";
 import errorimg from "./errorimg.gif";
 
 export {
@@ -15,5 +16,6 @@ export {
     flipflops_men,
     flipflops_women,
     flipflops_kids,
+    star,
     errorimg
 }

@@ -13,8 +13,32 @@ export const FiltersProvider = ({ children }) => {
 
   const { products } = useData();
 
-  const getProducts = () => {
-    return products;
+  const getFilteredProducts = () => {
+    return products.filter(
+      (item) =>
+        item.title.toLowerCase().includes(filters.search.toLowerCase()) &&
+        (filters.selectedCategories.includes(item.category) ||
+          filters.selectedCategories.length === 0) &&
+        item.sell_price <= filters.priceLessThan &&
+        (item.rating >= filters.selectedRating ||
+          filters.selectedRating === 0) &&
+        (filters.includeOutOfStock === true ||
+          item.in_stock !== filters.includeOutOfStock)
+    );
+  };
+
+  const getSortedProducts = (products) => {
+    if (filters.selectedSort === "LOW_TO_HIGH") {
+      return products.sort((a, b) => a.sell_price - b.sell_price);
+    } else if (filters.selectedSort === "HIGH_TO_LOW") {
+      return products.sort((a, b) => b.sell_price - a.sell_price);
+    } else {
+      return products;
+    }
+  };
+
+  const getProductList = () => {
+    return getSortedProducts(getFilteredProducts());
   };
 
   const value = {
@@ -24,7 +48,7 @@ export const FiltersProvider = ({ children }) => {
     selectedSort: filters.selectedSort,
     search: filters.search,
     includeOutOfStock: filters.includeOutOfStock,
-    getProducts,
+    getProductList,
     filtersDispatcher,
   };
 
