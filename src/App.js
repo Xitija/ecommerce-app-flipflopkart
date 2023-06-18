@@ -4,7 +4,7 @@ import "./App.css";
 import { Header } from "./components/Header/Header";
 
 import Mockman from "mockman-js";
-import { Products } from "./pages/Products";
+import { Products } from "./pages/Products/Products";
 import { Auth } from "./pages/Auth";
 import { Landing } from "./pages/Landing/Landing";
 import { Error } from "./pages/Error/Error";
