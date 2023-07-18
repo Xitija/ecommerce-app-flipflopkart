@@ -1,0 +1,13 @@
+.product-list-header {
+    display: flex;
+    flex-direction: row;
+    gap: 50%;
+    padding: 1rem;
+    margin: auto;
+    font-size: large;
+}
+
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+}
