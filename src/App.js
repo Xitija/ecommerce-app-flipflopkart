@@ -5,7 +5,6 @@ import Mockman from "mockman-js";
 
 import { Header } from "./components/Header/Header";
 import { Products } from "./pages/Products/Products";
-import { Auth } from "./pages/Auth";
 import { Landing } from "./pages/Landing/Landing";
 import { Error } from "./pages/Error/Error";
 import { Login } from "./pages/Login/Login";
