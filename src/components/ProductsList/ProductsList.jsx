@@ -9,7 +9,7 @@ export const ProductsList = () => {
   return (
     <div>
       <div className="product-list-header">
-        <label>Showing Total {productList.length} Flip-Flops</label>
+        <label>Showing Total {productList.length} FlipFlops</label>
       </div>
       <div className="product-list">
       {productList.map(
