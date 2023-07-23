@@ -1,15 +1,25 @@
-import { Routes, Route, NavLink } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
-import "./App.css";
-import { Header } from "./components/Header/Header";
-
+import { ToastContainer } from "react-toastify";
 import Mockman from "mockman-js";
+
+import { Header } from "./components/Header/Header";
 import { Products } from "./pages/Products/Products";
 import { Auth } from "./pages/Auth";
 import { Landing } from "./pages/Landing/Landing";
 import { Error } from "./pages/Error/Error";
-import logo from "./logo.png";
-import { useState, useRef } from "react";
+import { Login } from "./pages/Login/Login";
+import { SignUp } from "./pages/SignUp/SignUp";
+import { Wishlist } from "./pages/Wishlist/Wishlist";
+import { Cart } from "./pages/Cart/Cart";
+import { Account } from "./pages/Account/Account";
+import { Orders } from "./components/Orders/Orders";
+import { Address } from "./components/Address/Address";
+import { Profile } from "./components/Profile/Profile";
+
+import "react-toastify/dist/ReactToastify.css";
+import "./App.css";
+import { RequiresAuth } from "./components/RequiresAuth";
 
 function App() {
   return (
@@ -21,10 +31,52 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/products" element={<Products />} />
-          <Route path="/auth" element={<Auth />} />
+          <Route
+            path="/wishlist"
+            element={
+              <RequiresAuth>
+                <Wishlist />
+              </RequiresAuth>
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              <RequiresAuth>
+                <Cart />
+              </RequiresAuth>
+            }
+          />
+          <Route
+            path="/account"
+            element={
+              <RequiresAuth>
+                <Account />
+              </RequiresAuth>
+            }
+          >
+            <Route path="profile" element={<Profile />} />
+            <Route path="address" element={<Address />} />
+            <Route path="orders" element={<Orders />} />
+          </Route>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route path="/mockman" element={<Mockman />} />
-          <Route path="*" element={<Error />} />
+          <Route path="/page-not-found" element={<Error />} />
+          <Route path="*" element={<Navigate to={"/page-not-found"} />} />
         </Routes>
+        <ToastContainer
+          position="bottom-left"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="colored"
+        />
       </div>
     </div>
   );
