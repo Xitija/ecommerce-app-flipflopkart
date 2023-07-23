@@ -8,7 +8,7 @@ export const Error = () => {
     <div>
       <NavLink to="/products">
         <img
-          className="img"
+          className="img_error"
           src={errorimg}
           alt="Page_not_found"
         />
