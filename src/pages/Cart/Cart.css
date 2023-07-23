@@ -1,0 +1,30 @@
+.cart_empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+}
+
+.img_cart {
+    display: block;
+    margin: auto;
+    padding: 1rem;
+    width: 45%;
+    cursor: pointer;
+}
+
+.cart_empty button {
+    padding: 0.5rem;
+    width: 20%;
+    cursor: pointer;
+    background-color: #1bd0a0;
+    border: #1bd0a0;
+    color: white;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+
+.cart_empty button:hover{
+    background-color: #ff9824;
+    border-color: #ff9824;
+}
