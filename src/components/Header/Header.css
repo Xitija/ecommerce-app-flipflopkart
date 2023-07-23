@@ -13,6 +13,7 @@
 .navigation {
     display: flex;
     flex-direction: row;
+    align-items: center;
 }
 
 .nav-link {
@@ -55,4 +56,28 @@
 
 ::placeholder {
     margin-left: 1rem;
+}
+
+.btn-login {
+    padding: 0.5rem;
+    color: #fc800b;
+    background-color: white;
+    border: 2px solid #fc800b;
+    border-radius: 0.5rem;
+}
+
+.btn-login:hover{
+    color: white;
+    background-color: #fc800b;
+}
+
+.explore {
+    text-decoration: none;
+    font-style: italic;
+    color: #fc800b;
+    font-size: large;
+}
+
+.explore:hover {
+    color: #1bd0a0;
 }
