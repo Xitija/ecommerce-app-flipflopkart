@@ -1,0 +1,18 @@
+.profile-container {
+    padding: 1rem;
+    font-size: 1.1rem;
+}
+
+.profile-container .logout-btn {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid red;
+    color: white;
+    background-color: red;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.profile-container .label {
+    font-weight: 350;
+}
