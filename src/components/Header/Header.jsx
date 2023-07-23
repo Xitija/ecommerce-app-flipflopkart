@@ -1,16 +1,14 @@
-import {
-  NavLink,
-  useLocation,
-  useNavigate,
-} from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { CiHeart, CiShoppingBasket, CiUser, CiSearch } from "react-icons/ci";
 
 import { useFilters } from "../../contexts/FiltersContext";
+import { useAuth } from "../../contexts/AuthContext";
 import "../Header/Header.css";
 import finallogo from "../../assets/finallogo.png";
 
 export const Header = () => {
   const { search, filtersDispatcher } = useFilters();
+  const { userAuth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -54,15 +52,24 @@ export const Header = () => {
         />
       </div>
       <div className="navigation">
+        <NavLink to="/products" className="nav-link explore">
+          Explore
+        </NavLink>
         <NavLink to="/wishlist" className="nav-link">
           <CiHeart color="#fc800b" size={25} strokeWidth="1.2" />
         </NavLink>
         <NavLink to="/cart" className="nav-link">
           <CiShoppingBasket color="#fc800b" size={25} strokeWidth="1.2" />
         </NavLink>
-        <NavLink to="/account" className="nav-link">
-          <CiUser color="#fc800b" size={25} strokeWidth="1.2" />
-        </NavLink>
+        {userAuth.isLoggedIn ? (
+          <NavLink to="/account/profile" className="nav-link">
+            <CiUser color="#fc800b" size={25} strokeWidth="1.2" />
+          </NavLink>
+        ) : (
+          <NavLink to="/login" className="nav-link">
+            <button className="btn-login">Login</button>
+          </NavLink>
+        )}
       </div>
     </nav>
   );
