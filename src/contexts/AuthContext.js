@@ -5,16 +5,16 @@ import { toast } from "react-toastify";
 const Auth = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const user = localStorage.getItem("user")
+  /* const user = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
     : {};
   const token = localStorage.getItem("token")
     ? localStorage.getItem("token")
     : "";
-
+*/
   const [userAuth, setUserAuth] = useState({
-    loggedInUser: user,
-    isLoggedIn: token ? true : false,
+    loggedInUser: {},
+    isLoggedIn: false,
   });
 
   const [location, setLocation] = useState("");
@@ -71,7 +71,7 @@ export const AuthProvider = ({ children }) => {
   const value = {
     loginUser,
     userAuth,
-    logoutUser
+    logoutUser,
   };
 
   return <Auth.Provider value={value}>{children}</Auth.Provider>;
