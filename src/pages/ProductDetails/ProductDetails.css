@@ -1,0 +1,125 @@
+.product-details {
+    margin: 2% auto;
+    width: 80%;
+    display: flex;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, .24);
+}
+
+.product-details .product-image-container {
+    position: relative;
+}
+
+.product-details .product-image {
+    width: 30rem;
+    height: 30rem;
+    object-fit: contain;
+    position: relative;
+    padding: 1rem;
+    border-right: 0.1rem solid #ccc;
+}
+
+.product-details .detail-container {
+    padding: 1rem;
+    width: 100%;
+    position: relative;
+}
+
+.product-details .detail-container h2 {
+    font-weight: 500;
+    font-size: 1.5rem;
+}
+
+.product-details .detail-container .price-details {
+    display: flex;
+    align-items: center;
+}
+
+.price-details .selling-price {
+    padding-right: 0.5rem;
+    font-size: 2rem;
+    margin: 1rem 0 0.8rem 0;
+}
+
+.price-details .cost-price {
+    text-decoration: line-through;
+    padding-top: 0.2rem;
+    color: gray;
+    padding-right: 0.5rem;
+}
+
+.price-details .discount {
+    padding-top: 0.2rem;
+    color: green;
+
+}
+
+.product-details .detail-container .rating {
+    background-color: #008000;
+    color: #fff;
+    padding: 0.2rem 0.5rem;
+}
+
+.product-details .detail-container .in-stock-details {
+    display: flex;
+    align-items: center;
+}
+
+.product-details .detail-container .add-to-cart-btn {
+    margin-top: 15%;
+    background-color: #fc800b;
+    color: #fff;
+    border: none;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    position: relative;
+}
+
+.product-details .detail-container .add-to-cart-btn:disabled {
+    border: 1px solid #fca858;
+    background-color: #fca858;
+    color: #fff;
+    cursor: not-allowed;
+}
+
+.product-details .detail-container .size-container {
+    padding: 1rem 0;
+}
+
+.product-details .detail-container .size-container label {
+    color: gray;
+    padding-right: 0.5rem;
+}
+
+.product-details .detail-container .size-container .size {
+    padding: 0.5rem 1rem;
+    border: 1px solid grey;
+}
+
+.trending {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0.5rem 0.8rem;
+    background-color: #1bd0a0;
+    color: white;
+    margin: 0.5rem;
+}
+
+.wishlist {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0.5rem 0.5rem 0.2rem 0.5rem;
+    color: black;
+    margin: 0.5rem;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, .24);
+    border-radius: 1rem;
+    cursor: pointer;
+}
+
+.in-stock-details .tags {
+    padding: 0.5rem;
+    color: #46c001;
+}
