@@ -19,6 +19,7 @@
 .nav-link {
     display: block;
     padding: 1em;
+    position: relative;
 }
 
 .nav-link :hover {
@@ -66,7 +67,7 @@
     border-radius: 0.2rem;
 }
 
-.btn-login:hover{
+.btn-login:hover {
     color: white;
     background-color: #fc800b;
 }
@@ -80,4 +81,24 @@
 
 .explore:hover {
     color: #1bd0a0;
+}
+
+.wishlist-icon,
+.cart-icon {
+    position: relative;
+}
+
+.badge {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    width: 0.5rem;
+    height: 0.5rem;
+    right: -0.5rem;
+    padding: 0.25rem;
+    top: -0.3rem;
+    background-color: red;
+    color: white;
+    border-radius: 0.8rem;
+    font-size: 0.8rem;
 }

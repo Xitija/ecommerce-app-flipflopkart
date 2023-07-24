@@ -3,6 +3,7 @@ import { CiHeart, CiShoppingBasket, CiUser, CiSearch } from "react-icons/ci";
 
 import { useFilters } from "../../contexts/FiltersContext";
 import { useAuth } from "../../contexts/AuthContext";
+import { useProduct } from "../../contexts/ProductContext";
 import "../Header/Header.css";
 import finallogo from "../../assets/finallogo.png";
 
@@ -11,6 +12,7 @@ export const Header = () => {
   const { userAuth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
+  const { wishlist, cart } = useProduct();
 
   const handleSearchInput = () => {
     // TODO : if search length is more then navigate and dispatch both
@@ -56,10 +58,18 @@ export const Header = () => {
           Explore
         </NavLink>
         <NavLink to="/wishlist" className="nav-link">
-          <CiHeart color="#fc800b" size={25} strokeWidth="1.2" />
+          <div className="wishlist-icon">
+            <CiHeart color="#fc800b" size={25} strokeWidth="1.2" />
+            {wishlist.length > 0 && (
+              <div className="badge">{wishlist.length}</div>
+            )}
+          </div>
         </NavLink>
         <NavLink to="/cart" className="nav-link">
-          <CiShoppingBasket color="#fc800b" size={25} strokeWidth="1.2" />
+          <div className="cart-icon">
+            <CiShoppingBasket color="#fc800b" size={25} strokeWidth="1.2" />
+            {cart.length > 0 && <div className="badge">{cart.length}</div>}
+          </div>
         </NavLink>
         {userAuth.isLoggedIn ? (
           <NavLink to="/account/profile" className="nav-link">
