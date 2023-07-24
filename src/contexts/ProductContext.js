@@ -19,22 +19,6 @@ export const ProductProvider = ({ children }) => {
     initialProductState
   );
 
-  const getProduct = async (productId) => {
-    try {
-      const response = await fetch(`/api/products/${productId}`);
-
-      const data = await response.json();
-
-      if (response.status === 200) {
-        return data.product;
-      } else {
-        console.error(data);
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
   const getUserWishlist = async () => {
     try {
       const wishlistResponse = await fetch("/api/user/wishlist", {
@@ -70,9 +54,19 @@ export const ProductProvider = ({ children }) => {
     }
   };
 
+  const handleCart = (product, inUserCart) => {
+    console.log(inUserCart,"inuerc")
+    if (!userAuth?.isLoggedIn) {
+      toast.warning("Please Login to add Product to Cart");
+      navigate("/login");
+    } else {
+      inUserCart ? navigate("/cart") : addToCart(product);
+    }
+  };
+
   const removeFromWishlist = async (productId) => {
     try {
-      const addWishlistResponse = await fetch(
+      const removeWishlistResponse = await fetch(
         `/api/user/wishlist/${productId}`,
         {
           method: "DELETE",
@@ -82,14 +76,14 @@ export const ProductProvider = ({ children }) => {
           },
         }
       );
-      if (addWishlistResponse.status === 200) {
-        const { wishlist } = await addWishlistResponse.json();
+      if (removeWishlistResponse.status === 200) {
+        const { wishlist } = await removeWishlistResponse.json();
         productDispatcher({
           type: "SET_WISHLIST",
           payload: wishlist,
         });
       } else {
-        console.error(addWishlistResponse);
+        console.error(removeWishlistResponse);
       }
     } catch (e) {
       console.error(e);
@@ -124,8 +118,84 @@ export const ProductProvider = ({ children }) => {
     }
   };
 
+  const getUserCart = async () => {
+    try {
+      const cartResponse = await fetch("/api/user/cart", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: currentUserToken,
+        },
+      });
+
+      if (cartResponse.status === 200) {
+        const { cart } = await cartResponse.json();
+        productDispatcher({
+          type: "SET_CART",
+          payload: cart,
+        });
+      } else {
+        console.error(cartResponse);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const removeFromCart = async (productId) => {
+    try {
+      const removeCartResponse = await fetch(`/api/user/cart/${productId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: currentUserToken,
+        },
+      });
+      if (removeCartResponse.status === 200) {
+        const { cart } = await removeCartResponse.json();
+        productDispatcher({
+          type: "SET_CART",
+          payload: cart,
+        });
+      } else {
+        console.error(removeCartResponse);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const addToCart = async (product) => {
+    console.log("adding,", product);
+    const productToAdd = JSON.stringify({
+      product: product,
+    });
+    try {
+      const addCartResponse = await fetch("/api/user/cart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: currentUserToken,
+        },
+        body: productToAdd,
+      });
+      if (addCartResponse.status === 201) {
+        const { cart } = await addCartResponse.json();
+        productDispatcher({
+          type: "SET_CART",
+          payload: cart,
+        });
+      } else {
+        console.error(addCartResponse);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   const setCartAndWishlist = async () => {
     getUserWishlist();
+    getUserCart();
   };
 
   const emptyCartAndWishlist = async () => {
@@ -133,16 +203,17 @@ export const ProductProvider = ({ children }) => {
       type: "SET_WISHLIST",
       payload: [],
     });
+    productDispatcher({
+      type: "SET_CART",
+      payload: [],
+    });
   };
 
   const value = {
-    getProduct,
-    getUserWishlist,
     wishlist: productState.wishlist,
     cart: productState.cart,
-    removeFromWishlist,
-    addToWishlist,
     handleWishlist,
+    handleCart,
   };
 
   useEffect(() => {
