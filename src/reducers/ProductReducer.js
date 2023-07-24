@@ -11,5 +11,12 @@ export const productReducer = (state, action) => {
         ...state,
         wishlist: action.payload,
       };
+    case "SET_CART":
+      return {
+        ...state,
+        cart: action.payload,
+      };
+    default:
+      return { ...state };
   }
 };
