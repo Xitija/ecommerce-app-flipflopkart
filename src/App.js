@@ -5,6 +5,7 @@ import Mockman from "mockman-js";
 
 import { Header } from "./components/Header/Header";
 import { Products } from "./pages/Products/Products";
+import { ProductDetails } from "./pages/ProductDetails/ProductDetails";
 import { Landing } from "./pages/Landing/Landing";
 import { Error } from "./pages/Error/Error";
 import { Login } from "./pages/Login/Login";
@@ -15,14 +16,20 @@ import { Account } from "./pages/Account/Account";
 import { Orders } from "./components/Orders/Orders";
 import { Address } from "./components/Address/Address";
 import { Profile } from "./components/Profile/Profile";
+import { Loader } from "./components/Loader/Loader";
 
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
+
 import { RequiresAuth } from "./components/RequiresAuth";
+import { useData } from "./contexts/DataContext";
 
 function App() {
+  const { loader } = useData();
+
   return (
     <div className="App">
+      {loader && <Loader />}
       <header>
         <Header />
       </header>
@@ -30,6 +37,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path="/products" element={<Products />} />
+          <Route
+            path="/product-details/:productId"
+            element={<ProductDetails />}
+          />
           <Route
             path="/wishlist"
             element={
