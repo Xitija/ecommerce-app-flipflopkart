@@ -1,10 +1,17 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
 
 import { initialDataState, dataReducer } from "../reducers/DataReducer";
 
 export const Data = createContext();
 
 export const DataProvider = ({ children }) => {
+  const [loader, setLoader] = useState(false);
   const [dataState, dataDispatcher] = useReducer(dataReducer, initialDataState);
 
   const setData = async () => {
@@ -40,7 +47,7 @@ export const DataProvider = ({ children }) => {
 
   // TODO: setting only once how to avoid recalculation
   const setPriceRange = () => {
-    const products = dataState.products;
+    const { products } = dataState;
     return products?.reduce(
       (prices, { sell_price }) => {
         const min = sell_price < prices.minPrice ? sell_price : prices.minPrice;
@@ -52,12 +59,18 @@ export const DataProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    setLoader(true);
     setData();
+    const id = setTimeout(() => {
+      setLoader(false);
+    }, 500);
   }, []);
 
   const value = {
     categories: dataState.categories,
     products: dataState.products,
+    loader,
+    setLoader,
     setPriceRange,
     dataDispatcher,
   };

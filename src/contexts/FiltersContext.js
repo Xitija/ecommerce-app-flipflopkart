@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useReducer, useEffect } from "react";
 
 import { initialfilters, filtersReducer } from "../reducers/FilterReducer";
 import { useData } from "./DataContext";
@@ -11,7 +11,7 @@ export const FiltersProvider = ({ children }) => {
     initialfilters
   );
 
-  const { products } = useData();
+  const { products, setLoader } = useData();
 
   const getFilteredProducts = () => {
     return products.filter(
@@ -51,6 +51,13 @@ export const FiltersProvider = ({ children }) => {
     getProductList,
     filtersDispatcher,
   };
+
+  useEffect(() => {
+    setLoader(true);
+    const id = setTimeout(() => {
+      setLoader(false);
+    }, 500);
+  }, [filters]);
 
   return <Filters.Provider value={value}>{children}</Filters.Provider>;
 };
