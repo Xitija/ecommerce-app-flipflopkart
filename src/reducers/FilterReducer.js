@@ -42,12 +42,7 @@ export const filtersReducer = (state, action) => {
     case "CLEAR_FILTERS":
       return {
         ...state,
-        selectedCategories: [],
-        priceLessThan: 500,
-        selectedRating: 0,
-        selectedSort: "",
-        search: "",
-        includeOutOfStock: true,
+        ...initialfilters
       };
     default:
       return { ...state };
