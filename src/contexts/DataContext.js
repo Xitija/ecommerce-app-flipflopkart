@@ -45,6 +45,26 @@ export const DataProvider = ({ children }) => {
     }
   };
 
+  const getProduct = async (productId) => {
+    try {
+      setLoader(true);
+      const response = await fetch(`/api/products/${productId}`);
+
+      const data = await response.json();
+
+      if (response.status === 200) {
+        setLoader(false);
+        return data.product;
+      } else {
+        setLoader(false);
+        console.error(data);
+      }
+    } catch (e) {
+      setLoader(false);
+      console.error(e);
+    }
+  };
+
   // TODO: setting only once how to avoid recalculation
   const setPriceRange = () => {
     const { products } = dataState;
@@ -70,6 +90,7 @@ export const DataProvider = ({ children }) => {
     categories: dataState.categories,
     products: dataState.products,
     loader,
+    getProduct,
     setLoader,
     setPriceRange,
     dataDispatcher,
