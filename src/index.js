@@ -7,6 +7,7 @@ import { makeServer } from "./server";
 import { AuthProvider } from "./contexts/AuthContext";
 import { DataProvider } from "./contexts/DataContext";
 import { FiltersProvider } from "./contexts/FiltersContext";
+import { ProductProvider } from "./contexts/ProductContext";
 
 // Call make Server
 makeServer();
@@ -16,9 +17,11 @@ ReactDOM.render(
     <Router>
       <AuthProvider>
         <DataProvider>
-          <FiltersProvider>
-            <App />
-          </FiltersProvider>
+          <ProductProvider>
+            <FiltersProvider>
+              <App />
+            </FiltersProvider>
+          </ProductProvider>
         </DataProvider>
       </AuthProvider>
     </Router>
