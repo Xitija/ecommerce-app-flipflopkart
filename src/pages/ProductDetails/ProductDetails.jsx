@@ -9,18 +9,21 @@ import {
 } from "react-icons/bs";
 
 import { useProduct } from "../../contexts/ProductContext";
-import { useAuth } from "../../contexts/AuthContext";
+import { useData } from "../../contexts/DataContext";
 
 import "./ProductDetails.css";
 
 export const ProductDetails = () => {
   const [singleProduct, setSingleProduct] = useState({});
   const { productId } = useParams();
-  const { getProduct, productState, handleWishlist } = useProduct();
+  const { wishlist, cart, handleWishlist, handleCart } = useProduct();
+  const { getProduct } = useData();
 
-  const wishlistedByUser = productState.wishlist.some(
+  const wishlistedByUser = wishlist.some(
     (product) => product._id === singleProduct._id
   );
+
+  const inUserCart = cart.some((product) => product._id === singleProduct._id);
 
   const getSingleProduct = async () => {
     try {
@@ -30,8 +33,6 @@ export const ProductDetails = () => {
       console.error(e);
     }
   };
-
-  console.log(wishlistedByUser,"wishlistedByUser");
 
   useEffect(() => {
     getSingleProduct();
@@ -96,8 +97,9 @@ export const ProductDetails = () => {
           <button
             disabled={!singleProduct?.in_stock}
             className="add-to-cart-btn"
+            onClick={() => handleCart(singleProduct, inUserCart)}
           >
-            ADD TO CART
+            {inUserCart ? "GO TO CART" : "ADD TO CART"}
           </button>
           <div>
             <span
