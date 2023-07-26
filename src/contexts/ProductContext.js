@@ -233,7 +233,15 @@ export const ProductProvider = ({ children }) => {
       type: "ADD_ADDRESS",
       payload: currentAddress,
     });
+  };
 
+  const handleCheckout = () => {
+    productDispatcher({
+      type: "SET_CART",
+      payload: [],
+    });
+    navigate("/products");
+    toast.success("Order Placed Successfully!!");
   };
 
   const setCartAndWishlist = async () => {
@@ -262,6 +270,7 @@ export const ProductProvider = ({ children }) => {
     addToWishlist,
     addNewAddress,
     handleProductQuantity,
+    handleCheckout,
   };
 
   useEffect(() => {
