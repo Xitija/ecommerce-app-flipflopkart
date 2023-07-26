@@ -227,6 +227,15 @@ export const ProductProvider = ({ children }) => {
     }
   };
 
+  const addNewAddress = (currentAddress) => {
+    console.log(currentAddress);
+    productDispatcher({
+      type: "ADD_ADDRESS",
+      payload: currentAddress,
+    });
+
+  };
+
   const setCartAndWishlist = async () => {
     getUserWishlist();
     getUserCart();
@@ -246,10 +255,12 @@ export const ProductProvider = ({ children }) => {
   const value = {
     wishlist: productState.wishlist,
     cart: productState.cart,
+    address: productState.address,
     removeFromCart,
     handleWishlist,
     handleCart,
     addToWishlist,
+    addNewAddress,
     handleProductQuantity,
   };
 
