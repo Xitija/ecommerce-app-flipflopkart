@@ -1,0 +1,60 @@
+.checkout {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 5% auto;
+    width: 80%;
+}
+
+.select-address {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    padding: 1rem;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.23);
+    height: fit-content;
+}
+
+.address-detail-card {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.23);
+    min-width: 90%;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+.selected-btn {
+    width: 100%;
+    padding: 0.5rem;
+    color: white;
+    background-color: #fc800b;
+    border: 1px solid #fc800b;
+    border-radius: 0.2rem;
+    cursor: pointer;
+}
+
+.non-selected-btn {
+    width: 100%;
+    padding: 0.5rem;
+    color: #fc800b;
+    background-color: white;
+    border: 1px solid #fc800b;
+    border-radius: 0.2rem;
+    cursor: pointer;
+}
+
+.add-new-address {
+    padding: 0.5rem;
+    cursor: pointer;
+    background-color: #1bd0a0;
+    border: #1bd0a0;
+    color: white;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+
+.proceed-checkout {
+    width: 50%;
+    margin: 10% auto;
+}
