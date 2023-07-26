@@ -15,7 +15,7 @@ export const Account = () => {
       <nav className="nav-container">
         <NavLink className="nav-tab" style={getActiveStyle} to="/account/profile">My Profile</NavLink>
         <NavLink className="nav-tab" style={getActiveStyle} to="/account/address">My Addresses</NavLink>
-        <NavLink className="nav-tab" style={getActiveStyle} to="/account/orders">My Orders</NavLink>
+        {/* <NavLink className="nav-tab" style={getActiveStyle} to="/account/orders">My Orders</NavLink> */}
       </nav>
       <div className="tab-content">
         <Outlet />
