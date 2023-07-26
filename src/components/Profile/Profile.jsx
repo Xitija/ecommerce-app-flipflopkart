@@ -6,8 +6,6 @@ export const Profile = () => {
   const { userAuth,logoutUser } = useAuth();
   const { loggedInUser } = userAuth;
 
-  console.log(loggedInUser);
-
   return (
     <div className="profile-container">
       <p>

@@ -45,10 +45,7 @@ export const Address = () => {
   const handleSaveAddress = () => {
     if (isFieldsValid()) {
       setIsModalOpen(false);
-
-      console.log(currentAddress);
-
-      console.log(address);
+      
       const existingAddress = address.find(
         (address) => address.id === currentAddress.id
       );

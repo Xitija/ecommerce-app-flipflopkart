@@ -21,7 +21,6 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
 
   const loginUser = async (email, password) => {
-    console.log(email, password);
     try {
       const passValue = JSON.stringify({
         email: email,
@@ -34,8 +33,7 @@ export const AuthProvider = ({ children }) => {
       });
 
       const data = await response.json();
-
-      console.log(data, "dt");
+      
       if (response.status === 200) {
         localStorage.setItem("token", data.encodedToken);
         localStorage.setItem("user", JSON.stringify(data.foundUser));
@@ -47,7 +45,7 @@ export const AuthProvider = ({ children }) => {
         toast.success("Login Successful!");
         navigate(location ? location : "/products");
       } else {
-        console.log(data.errors[0]);
+        console.error(data.errors[0]);
         throw new Error(JSON.stringify(data.errors[0]));
       }
     } catch (e) {

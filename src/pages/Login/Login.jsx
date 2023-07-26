@@ -17,9 +17,7 @@ export const Login = () => {
 
   const loginHandler = (e, guest) => {
     e.preventDefault();
-    console.log(loginCredentials);
     if (guest) {
-      console.log(guest);
       loginUser("adarshbalika@gmail.com", "adarshbalika");
     } else {
       loginUser(loginCredentials.email, loginCredentials.password);

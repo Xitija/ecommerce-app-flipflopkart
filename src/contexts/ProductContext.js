@@ -91,7 +91,6 @@ export const ProductProvider = ({ children }) => {
   };
 
   const addToWishlist = async (product) => {
-    console.log("adding,", product);
     const productToAdd = JSON.stringify({
       product: product,
     });
@@ -228,7 +227,6 @@ export const ProductProvider = ({ children }) => {
   };
 
   const addNewAddress = (currentAddress) => {
-    console.log(currentAddress);
     productDispatcher({
       type: "ADD_ADDRESS",
       payload: currentAddress,

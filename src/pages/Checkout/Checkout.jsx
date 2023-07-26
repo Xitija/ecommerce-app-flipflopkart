@@ -12,7 +12,6 @@ export const Checkout = () => {
   const [deliveryAddress, setDeliveryAddress] = useState(
     address[0] ? address[0] : {}
   );
-  console.log(address);
 
   const handleAddress = (selectAddress) => {
     setDeliveryAddress(selectAddress);
