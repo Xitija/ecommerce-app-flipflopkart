@@ -9,7 +9,6 @@ import "./Address.css";
 
 export const Address = () => {
   const { address, addNewAddress } = useProduct();
-  console.log(address);
 
   const initialAddress = {
     id: uuid(),
@@ -175,6 +174,7 @@ export const Address = () => {
                   </p>
                   <p>Pincode : {pincode}</p>
                   <p>Phone: {mobile}</p>
+                  <hr/>
                 </div>
               )
             )}
