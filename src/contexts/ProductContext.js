@@ -55,7 +55,6 @@ export const ProductProvider = ({ children }) => {
   };
 
   const handleCart = (product, inUserCart) => {
-    console.log(inUserCart,"inuerc")
     if (!userAuth?.isLoggedIn) {
       toast.warning("Please Login to add Product to Cart");
       navigate("/login");
@@ -82,6 +81,7 @@ export const ProductProvider = ({ children }) => {
           type: "SET_WISHLIST",
           payload: wishlist,
         });
+        toast.info("Product removed from Wishlist");
       } else {
         console.error(removeWishlistResponse);
       }
@@ -110,6 +110,7 @@ export const ProductProvider = ({ children }) => {
           type: "SET_WISHLIST",
           payload: wishlist,
         });
+        toast.info("Product added to Wishlist");
       } else {
         console.error(addWishlistResponse);
       }
@@ -153,10 +154,12 @@ export const ProductProvider = ({ children }) => {
       });
       if (removeCartResponse.status === 200) {
         const { cart } = await removeCartResponse.json();
+        const updatedCart = cart.filter(({ qty }) => qty > 0);
         productDispatcher({
           type: "SET_CART",
-          payload: cart,
+          payload: updatedCart,
         });
+        toast.info("Product removed from Cart");
       } else {
         console.error(removeCartResponse);
       }
@@ -166,7 +169,6 @@ export const ProductProvider = ({ children }) => {
   };
 
   const addToCart = async (product) => {
-    console.log("adding,", product);
     const productToAdd = JSON.stringify({
       product: product,
     });
@@ -181,12 +183,44 @@ export const ProductProvider = ({ children }) => {
       });
       if (addCartResponse.status === 201) {
         const { cart } = await addCartResponse.json();
+        const updatedCart = cart.filter(({ qty }) => qty > 0);
         productDispatcher({
           type: "SET_CART",
-          payload: cart,
+          payload: updatedCart,
         });
+        toast.info("Product added to Cart");
       } else {
         console.error(addCartResponse);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const handleProductQuantity = async (productId, type) => {
+    const productQuantity = JSON.stringify({
+      action: {
+        type: type,
+      },
+    });
+    try {
+      const updateCartResponse = await fetch(`/api/user/cart/${productId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: currentUserToken,
+        },
+        body: productQuantity,
+      });
+      if (updateCartResponse.status === 200) {
+        const { cart } = await updateCartResponse.json();
+        const updatedCart = cart.filter(({ qty }) => qty > 0);
+        productDispatcher({
+          type: "SET_CART",
+          payload: updatedCart,
+        });
+      } else {
+        console.error(updateCartResponse);
       }
     } catch (e) {
       console.error(e);
@@ -212,8 +246,11 @@ export const ProductProvider = ({ children }) => {
   const value = {
     wishlist: productState.wishlist,
     cart: productState.cart,
+    removeFromCart,
     handleWishlist,
     handleCart,
+    addToWishlist,
+    handleProductQuantity,
   };
 
   useEffect(() => {
