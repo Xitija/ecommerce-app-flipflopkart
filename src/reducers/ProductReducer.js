@@ -21,6 +21,24 @@ export const productReducer = (state, action) => {
         ...state,
         address: [...state.address, action.payload],
       };
+    case "EDIT_ADDRESS":
+      const newAddresses = state.address.map((currAddress) =>
+        currAddress.id === action.payload.id
+          ? { ...action.payload }
+          : currAddress
+      );
+      return {
+        ...state,
+        address: newAddresses,
+      };
+    case "DELETE_ADDRESS":
+      const remainingAddresses = state.address.filter(
+        (currAddress) => currAddress.id !== action.payload.id
+      );
+      return {
+        ...state,
+        address: remainingAddresses,
+      };
     default:
       return { ...state };
   }

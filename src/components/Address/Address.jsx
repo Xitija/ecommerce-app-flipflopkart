@@ -8,7 +8,7 @@ import { useProduct } from "../../contexts/ProductContext";
 import "./Address.css";
 
 export const Address = () => {
-  const { address, addNewAddress } = useProduct();
+  const { address, addNewAddress, editAddress, deleteAddress } = useProduct();
 
   const initialAddress = {
     id: uuid(),
@@ -25,7 +25,15 @@ export const Address = () => {
   const [currentAddress, setCurrentAddress] = useState(initialAddress);
 
   const isFieldsValid = () => {
-    return currentAddress.name !== "";
+    return (
+      currentAddress.name !== "" &&
+      currentAddress.house &&
+      currentAddress.city &&
+      currentAddress.state &&
+      currentAddress.country &&
+      currentAddress.pincode &&
+      currentAddress.mobile
+    );
   };
 
   const handleDiscard = () => {
@@ -42,16 +50,22 @@ export const Address = () => {
     setIsModalOpen(true);
   };
 
+  const handleEdit = (currAddress) => {
+    setFormTitle("Edit Address");
+    setCurrentAddress(currAddress);
+    setIsModalOpen(true);
+  };
+
   const handleSaveAddress = () => {
     if (isFieldsValid()) {
       setIsModalOpen(false);
-      
+
       const existingAddress = address.find(
         (address) => address.id === currentAddress.id
       );
 
       if (existingAddress) {
-        // editHabit(c);
+        editAddress(currentAddress);
       } else {
         addNewAddress(currentAddress);
       }
@@ -155,30 +169,30 @@ export const Address = () => {
       <div>
         {address.length > 0 && (
           <div className="cart-product-list">
-            {address.map(
-              ({ id, name, house, city, state, country, pincode, mobile }) => (
-                <div className="address-card" key={id}>
-                  <p>{name}</p>
-                  <p>
-                    <>{house}</>
-                    <>
-                      {city} {", "}
-                    </>
-                    <>
-                      {state} {", "}
-                    </>
-                    <>{country} </>
-                  </p>
-                  <p>Pincode : {pincode}</p>
-                  <p>Phone: {mobile}</p>
-                  <hr/>
-                </div>
-              )
-            )}
+            {address.map((currAddress) => (
+              <div className="address-card" key={currAddress.id}>
+                <p>{currAddress.name}</p>
+                <p>
+                  <>{currAddress.house}</>
+                  <>
+                    {currAddress.city} {", "}
+                  </>
+                  <>
+                    {currAddress.state} {", "}
+                  </>
+                  <>{currAddress.country} </>
+                </p>
+                <p>Pincode : {currAddress.pincode}</p>
+                <p>Phone: {currAddress.mobile}</p>
+                <button className="edit-address" onClick={(e) => handleEdit(currAddress)}>Edit</button>
+                <button className="delete-address"onClick={() => deleteAddress(currAddress)}>Delete</button>
+                <hr />
+              </div>
+            ))}
           </div>
         )}
         <button className="new-address-btn" onClick={handleAddAddress}>
-          <AiOutlinePlus /> Add New Address
+          <AiOutlinePlus /> Add / Edit Address
         </button>
       </div>
       <Modal

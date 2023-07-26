@@ -233,6 +233,20 @@ export const ProductProvider = ({ children }) => {
     });
   };
 
+  const editAddress = (editedAddress) => {
+    productDispatcher({
+      type: "EDIT_ADDRESS",
+      payload: editedAddress,
+    });
+  };
+
+  const deleteAddress = (deleteAddress) => {
+    productDispatcher({
+      type: "DELETE_ADDRESS",
+      payload: deleteAddress,
+    });
+  };
+
   const handleCheckout = () => {
     productDispatcher({
       type: "SET_CART",
@@ -269,6 +283,8 @@ export const ProductProvider = ({ children }) => {
     addNewAddress,
     handleProductQuantity,
     handleCheckout,
+    editAddress,
+    deleteAddress,
   };
 
   useEffect(() => {
