@@ -16,6 +16,11 @@ export const productReducer = (state, action) => {
         ...state,
         cart: action.payload,
       };
+    case "ADD_ADDRESS":
+      return {
+        ...state,
+        address: [...state.address, action.payload],
+      };
     default:
       return { ...state };
   }
