@@ -23,6 +23,7 @@ import "./App.css";
 
 import { RequiresAuth } from "./components/RequiresAuth";
 import { useData } from "./contexts/DataContext";
+import { Checkout } from "./pages/Checkout/Checkout";
 
 function App() {
   const { loader } = useData();
@@ -69,6 +70,14 @@ function App() {
             <Route path="address" element={<Address />} />
             <Route path="orders" element={<Orders />} />
           </Route>
+          <Route
+            path="/checkout"
+            element={
+              <RequiresAuth>
+                <Checkout />
+              </RequiresAuth>
+            }
+          ></Route>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/mockman" element={<Mockman />} />
